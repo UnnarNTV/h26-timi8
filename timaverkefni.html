@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="is">
   <head>
     <meta charset="UTF-8" />
@@ -89,6 +89,14 @@
         // - sækir töluna úr talaN (munið Number())
         // - notar for-loopu til að búa til texta með tölunum 1 upp í N
         // - setur textann í verkefni1
+        function teljaUpp() {
+          const tala = Number(document.getElementById("talaN").value);
+          let texti = "";
+          for (let i = 1; i <= tala; i++) {
+            texti += i + " ";
+          }
+          document.getElementById("verkefni1").innerHTML = texti;
+        }
       </script>
     </section>
 
@@ -106,12 +114,20 @@
       <script>
         // TODO 1: Skrifaðu ARROW function cIF(c) sem skilar Fahrenheit
         // const cIF = (c) => ...
+        const cIF = (c) => (c * 9) / 5 + 32;
 
         // TODO 2: Skrifaðu function synaHitatoflu() sem:
         // - notar for-loopu frá 0 upp í 100 sem hoppar um 10 (i += 10)
         // - býr til línu fyrir hverja tölu: "20°C = 68°F<br>"
         // - kallar á cIF() til að reikna Fahrenheit
         // - setur allt í verkefni2
+        function synaHitatoflu() {
+          let texti = "";
+          for (let i = 0; i <= 100; i += 10) {
+            texti += i + "°C = " + cIF(i) + "°F<br>";
+          }
+          document.getElementById("verkefni2").innerHTML = texti;
+        }
       </script>
     </section>
 
@@ -129,10 +145,25 @@
         // TODO 1: Skrifaðu function reiknaSummu(fylki) sem:
         // - notar for...of til að leggja saman öll stökin í fylkinu
         // - SKILAR (return) summunni
+        function reiknaSummu(fylki) {
+          let sum = 0;
+          for (const eittVerd of fylki) {
+            sum += eittVerd;
+          }
+          return sum;
+        }
 
         // TODO 2: Skrifaðu function synaSummu() sem kallar á reiknaSummu(verd)
         // og birtir: "Samtals: 9010 kr."
         // Bónus: birtu líka meðalverð (summa / verd.length)
+        function synaSummu() {
+          document.getElementById("verkefni3").innerHTML =
+            "Samtals: " +
+            reiknaSummu(verd) +
+            " kr.<br>Meðalverð: " +
+            reiknaSummu(verd) / verd.length +
+            " kr.";
+        }
       </script>
     </section>
 
@@ -150,11 +181,26 @@
         // - ord.length er fjöldi stafa, ord[0] er fyrsti stafurinn
         // - síðasti stafurinn er ord[ord.length - 1]
         // - láttu loopuna byrja aftast og telja NIÐUR (i--)
+        function snuaVid(ord) {
+          let ofugt = "";
+          for (let i = ord.length - 1; i >= 0; i--) {
+            ofugt += ord[i];
+          }
+          if (ofugt === ord) {
+            ofugt += " Þetta er samhverft orð!";
+          }
+
+          return ofugt;
+        }
 
         // TODO 2: Skrifaðu function synaOfugt() sem sækir orðið úr ordInput,
         // kallar á snuaVid() og birtir svarið í verkefni4.
         // Bónus: ef orðið er eins aftur á bak (t.d. "abba" eða "rotor"),
         // skrifaðu líka "Þetta er samhverft orð!"
+        function synaOfugt() {
+          let ord = document.getElementById("ordInput").value;
+          document.getElementById("verkefni4").innerHTML = snuaVid(ord);
+        }
       </script>
     </section>
 
@@ -175,16 +221,33 @@
         // - notar for...of á innkaup til að búa til "<li>vara</li>" fyrir hverja vöru
         // - setur það inn í innkaupalisti
         // - uppfærir fjoldiVara með innkaup.length
+        function teiknaLista() {
+          let listi = "";
+          for (const vara of innkaup) {
+            listi += "<li>" + vara + "</li>";
+          }
+          document.getElementById("innkaupalisti").innerHTML = listi;
+          document.getElementById("fjoldiVara").innerHTML = innkaup.length;
+        }
 
         // TODO 2: Skrifaðu function baetaVid() sem:
         // - sækir vöruna úr varaInput
         // - bætir henni í fylkið: innkaup.push(vara)
         // - tæmir input-ið: document.getElementById("varaInput").value = ""
         // - kallar á teiknaLista()
+        function baetaVid() {
+          let vara = document.getElementById("varaInput").value;
+          innkaup.push(vara);
+          document.getElementById("varaInput").value = "";
+          teiknaLista();
+        }
 
         // SPURNING (svaraðu í athugasemd hér fyrir neðan):
         // Af hverju er innkaup búið til fyrir utan functions?
+        // Svo að það sé til á global scope og aðgengilegt fyrir báðar functions sem að nota hana
+
         // Hvað myndi gerast ef það væri búið til inni í baetaVid()?
+        // Við myndum fá reference error þegar við reynum að lesa innkaup fylkið í teiknaLista()
       </script>
     </section>
 
