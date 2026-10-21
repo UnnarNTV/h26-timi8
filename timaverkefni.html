@@ -268,6 +268,26 @@
         //    sem breyta teljaranum og kalla svo á uppfaera()
         // Bónus: ef teljarinn fer undir 0, láttu textann verða rauðan
         //        (document.getElementById("verkefni6").style.color = "red")
+        let teljari = 0;
+        function uppfaera() {
+          document.getElementById("verkefni6").style.color = "black";
+          if (teljari < 0) {
+            document.getElementById("verkefni6").style.color = "red";
+          }
+          document.getElementById("verkefni6").innerHTML = teljari;
+        }
+        function haekka() {
+          teljari++;
+          uppfaera();
+        }
+        function laekka() {
+          teljari--;
+          uppfaera();
+        }
+        function nullstilla() {
+          teljari = 0;
+          uppfaera();
+        }
       </script>
     </section>
 
@@ -291,6 +311,26 @@
       <script>
         // TODO: Skrifaðu function fizzBuzz()
         // Passaðu röðina á if-unum: hvaða skilyrði þarf að athuga fyrst?
+        function fizzBuzz() {
+          let texti = "";
+          let deilist3 = false;
+          let deilist5 = false;
+          for (let i = 1; i <= 100; i++) {
+            deilist3 = i % 3 === 0;
+            deilist5 = i % 5 === 0;
+
+            if (deilist3 && deilist5) {
+              texti += "FizzBuzz ";
+            } else if (deilist3) {
+              texti += "Fizz ";
+            } else if (deilist5) {
+              texti += "Buzz ";
+            } else {
+              texti += i + " ";
+            }
+          }
+          document.getElementById("verkefni7").innerHTML = texti;
+        }
       </script>
     </section>
   </body>
